@@ -23,11 +23,14 @@ namespace TaskSchedulerUWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public TaskViewModel ViewModel;
+
+
         public MainPage()
         {
             this.InitializeComponent();
 
-            this.DataContext = new TaskViewModel();
+            this.DataContext = ViewModel = new TaskViewModel();
         }
     }
 }

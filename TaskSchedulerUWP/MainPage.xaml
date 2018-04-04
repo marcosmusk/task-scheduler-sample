@@ -5,23 +5,57 @@
     xmlns:local="using:TaskSchedulerUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:TaskSchedulerUWP.ViewModels"
+    xmlns:models="using:TaskSchedulerUWP.Models"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Padding="100">
-            <TextBlock FontSize="50" FontWeight="Bold">Tarefas</TextBlock>
-            <ListView ItemsSource="{x:Bind Tasks}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="6">
-                            <SymbolIcon Symbol="Audio" Margin="0,0,12,0"/>
-                            <StackPanel>
-                                <TextBlock Text="{x:Bind Title}"/>
+            <TextBlock FontSize="45" FontWeight="Bold" HorizontalAlignment="Center">Tarefas</TextBlock>
+            <TextBlock FontSize="30">Url</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{x:Bind ViewModel.Url, Mode=TwoWay}" Width="300" HorizontalAlignment="Left"></TextBox>
+                <Button Command="{x:Bind ViewModel.RefreshCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Refresh" Margin="0,0,12,0"/>
+                        <TextBlock> Atualizar</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <GridView ItemsSource="{x:Bind ViewModel.Tasks, Mode=OneWay}" Margin="0,15">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Task">
+                        <Border Name="Border" BorderBrush="Black" BorderThickness="2">
+                            <StackPanel Margin="6" Width="250" HorizontalAlignment="Stretch">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="75*"></ColumnDefinition>
+                                        <ColumnDefinition Width="25*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <SymbolIcon Grid.Column="0"  Symbol="Page" Margin="0,0,12,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                        <SymbolIcon Symbol="Important" Margin="0,0,12,0" 
+                                                HorizontalAlignment="Right"
+                                            Visibility="{x:Bind Important}" Foreground="Goldenrod" />
+                                        <TextBlock Text="{x:Bind Priority}" 
+                                                HorizontalAlignment="Right"
+                                               FontWeight="Bold" FontSize="20"/>
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <StackPanel Margin="0,20" HorizontalAlignment="Stretch">
+                                        <TextBlock FontWeight="Bold" FontSize="20" Text="{x:Bind Title}"/>
+                                        <TextBlock Text="{x:Bind Description}" Height="100"/>
+                                    </StackPanel>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
+                        </Border>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </GridView.ItemTemplate>
+            </GridView>
+
         </StackPanel>
     </Grid>
 </Page>
