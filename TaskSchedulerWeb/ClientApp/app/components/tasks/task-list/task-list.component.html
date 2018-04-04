@@ -1,0 +1,53 @@
+﻿<h1>Tarefas</h1>
+
+<hr />
+
+<p *ngIf="!tasks"><em>Carregando...</em></p>
+
+
+<button type="button" class="btn btn-primary" (click)="new()">
+    <span class='glyphicon glyphicon-plus'></span> Nova Tarefa
+</button>
+
+<div *ngIf="tasks">
+    <ul>
+        <li *ngFor="let task of tasks">
+            <div class="note priority-{{task.priority}}">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label *ngIf="task.important" class="label label-warning label">Importante!</label>
+                    </div>
+                    <div class="action-buttons col-md-6">
+                        <button type="button" (click)="setImportant(task)" class="btn btn-sm btn-warning"><span class='glyphicon glyphicon-alert' title="Importante"></span></button>
+                        <button [disabled]="!task.title" *ngIf="task.editing" type="button" (click)="save(task)" class="btn btn-sm btn-success"><span class='glyphicon glyphicon-floppy-saved' title="Salvar"></span></button>
+                        <button *ngIf="!task.editing" type="button" (click)="edit(task)" class="btn btn-sm btn-primary"><span class='glyphicon glyphicon-pencil' title="Editar"></span></button>
+                        <button type="button" (click)="remove(task)" class="btn btn-sm btn-default"><span class='glyphicon glyphicon-remove' title="Remover"></span></button>
+
+                    </div>
+                </div>
+                <br />
+                
+                <div class="row">
+                    <div class="col-md-9">
+                        <input class="form-control"
+                               type="text"
+                               [disabled]="!task.editing"
+                               [(ngModel)]="task.title"
+                               placeholder="Titulo*"
+                               name="title" maxlength="255" required>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" style="float:right; padding:3px;" [disabled]="!task.editing" [(ngModel)]="task.priority">
+                            <option *ngFor="let priorityNumber of priorityList" [ngValue]="priorityNumber">{{priorityNumber}}</option>
+                        </select>
+                    </div>
+                </div>
+                <textarea class="form-control" 
+                          [disabled]="!task.editing"
+                          [(ngModel)]="task.description" 
+                          placeholder="Descrição"
+                          maxlength="800"></textarea>
+            </div>
+        </li>
+    </ul>
+</div>

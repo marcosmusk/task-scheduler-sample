@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/TaskSchedulerUWP/bin/x86/Debug
+/TaskSchedulerUWP/obj
+/.vs/TaskScheduler/v15/Server/sqlite3
