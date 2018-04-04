@@ -10,10 +10,12 @@ namespace TaskSchedulerUWP.Services
 {
     public class TaskApiService
     {
+        public static string UrlBase { get; set; }
+
         public async Task<IEnumerable<Models.Task>> GetTasks()
         {
             IEnumerable<Models.Task> tasks = new List<Models.Task>();
-            Uri geturi = new Uri($"{TaskViewModel.UrlBase}/api/Task/getTasks"); //replace your url  
+            Uri geturi = new Uri($"{UrlBase}/api/Task/getTasks"); //replace your url  
             System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
             System.Net.Http.HttpResponseMessage responseGet = await client.GetAsync(geturi);
             if (responseGet.IsSuccessStatusCode)

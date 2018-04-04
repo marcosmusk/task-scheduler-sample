@@ -16,7 +16,6 @@ namespace TaskSchedulerUWP.ViewModels
 {
     public class TaskViewModel : INotifyPropertyChanged
     {
-        public static string UrlBase { get; set; }
 
         private string _url;
         public string Url
@@ -25,7 +24,7 @@ namespace TaskSchedulerUWP.ViewModels
             set
             {
                 _url = value;
-                UrlBase = _url;
+                TaskApiService.UrlBase = _url;
                 NotifyPropertyChanged();
             }
         }

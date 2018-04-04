@@ -12,13 +12,8 @@ import { TaskService } from './components/tasks/task.service';
     ],
     providers: [
         { provide: 'ORIGIN_URL', useValue: location.origin },
-        { provide: 'BASE_URL', useFactory: getBaseUrl },
         TaskService,
     ]
 })
 export class AppModule {
-}
-
-export function getBaseUrl() {
-    return document.getElementsByTagName('base')[0].href;
 }
