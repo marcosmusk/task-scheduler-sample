@@ -2,5 +2,8 @@
 
 Technologies
 * .NET Core 2.0
-* Angular
-* SQL Server database
+* UWP (Win10)
+* Angular 5
+* SQL Server 
+
+
